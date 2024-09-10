@@ -12,9 +12,9 @@ import java.time.LocalDate;
 @Getter
 public class UserCreateRequest {
     @NotEmpty
-    @Size(min = 2, max = 50, message = "User name must be east 2 character and maximum 50 character!")
+    @Size(min = 2, max = 50, message = "USERNAME_INVALID")
     private String username;
-    @Size(min = 8, max = 64, message = "Password must be east 8 character and maximum 64 character!")
+    @Size(min = 8, max = 64, message = "PASSWORD_INVALID")
     private String password;
     private String firstName;
     private String lastName;

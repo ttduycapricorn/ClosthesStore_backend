@@ -1,5 +1,6 @@
 package com.devteria.server.controller;
 
+import com.devteria.server.dto.request.ApiResponse;
 import com.devteria.server.dto.request.UserCreateRequest;
 import com.devteria.server.dto.request.UserUpdateRequest;
 import com.devteria.server.entity.User;
@@ -18,8 +19,10 @@ public class UserController {
 
     @CrossOrigin
     @PostMapping
-    public User create(@RequestBody @Valid UserCreateRequest request) {
-       return userService.createUser(request);
+    public ApiResponse<User> create(@RequestBody @Valid UserCreateRequest request) {
+       ApiResponse<User> response = new ApiResponse<>();
+       response.setResult(userService.createUser(request));
+       return response;
     }
 
     @GetMapping
