@@ -1,17 +1,21 @@
 package com.devteria.server.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private LocalDate birthDay;
+    String password;
+    String firstName;
+    String lastName;
+    String email;
+    String phone;
+    LocalDate birthDay;
 }
