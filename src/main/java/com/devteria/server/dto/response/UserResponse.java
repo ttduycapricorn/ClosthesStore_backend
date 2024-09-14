@@ -1,18 +1,19 @@
-package com.devteria.server.entity;
+package com.devteria.server.dto.response;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
 @Setter
 @Getter
-@Entity
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User {
+public class UserResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     String id;
