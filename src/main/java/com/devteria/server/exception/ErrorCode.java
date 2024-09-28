@@ -14,6 +14,7 @@ public enum ErrorCode {
     EMAIL_INVALID(1005, "Email is invalid"),
     INVALID_KEY_EXCEPTION(1006, "invalid exception key"),
     LIST_PRODUCT_NOTFOUND(1007, "Product not found"),
+    UNAUTHENTICATED_EXCEPTION(1008, "Unauthenticated exception"),
     UNCATEGORIZED_EXCEPTION(9999, "uncategorized exception error"), //ngoại lệ không được phân loại
     ;
 

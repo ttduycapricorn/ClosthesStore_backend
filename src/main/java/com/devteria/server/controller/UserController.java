@@ -2,6 +2,7 @@ package com.devteria.server.controller;
 
 import com.devteria.server.dto.request.UserCreateRequest;
 import com.devteria.server.dto.request.UserUpdateRequest;
+import com.devteria.server.dto.response.UserResponse;
 import com.devteria.server.entity.User;
 import com.devteria.server.service.UserService;
 import jakarta.validation.Valid;
@@ -28,12 +29,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable("id") String id) {
+    public UserResponse getById(@PathVariable("id") String id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable("id") String id, @RequestBody UserUpdateRequest user) {
+    public UserResponse update(@PathVariable("id") String id, @RequestBody UserUpdateRequest user) {
         return userService.updateUser(id, user);
     }
 
