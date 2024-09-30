@@ -1,17 +1,20 @@
 package com.devteria.server.service;
 
 import com.devteria.server.dto.request.AuthenticationRequest;
+import com.devteria.server.dto.request.IntrospectRequest;
 import com.devteria.server.dto.response.AuthenticationResponse;
+import com.devteria.server.dto.response.IntrospectResponse;
 import com.devteria.server.exception.AppException;
 import com.devteria.server.exception.ErrorCode;
 import com.devteria.server.repository.UserRepository;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
+import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import org.slf4j.Logger;
@@ -20,10 +23,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-
 
 @Service
 @Builder
@@ -35,6 +38,21 @@ public class AuthenticationService {
 
     @NonFinal
     protected static final String SIGNER_KEY = "TuzQEgZ5zUZVmhXYe61rCQlOHU5oy6Pc";
+
+    public IntrospectResponse introspect(IntrospectRequest request) throws ParseException, JOSEException {
+        var token = request.getToken();
+
+        JWSVerifier verifier = new MACVerifier(SIGNER_KEY.getBytes());
+        SignedJWT signedJWT = SignedJWT.parse(token);
+
+        Date expiryTime = signedJWT.getJWTClaimsSet().getExpirationTime();
+
+        var verified = signedJWT.verify(verifier);
+
+        return IntrospectResponse.builder()
+                .valid(verified && expiryTime.after(new Date()))
+                .build();
+    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -53,7 +71,6 @@ public class AuthenticationService {
                 .IsAuthenticated(true)
                 .build();
     }
-
 
     private String generateToken(String username) {
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS256);
