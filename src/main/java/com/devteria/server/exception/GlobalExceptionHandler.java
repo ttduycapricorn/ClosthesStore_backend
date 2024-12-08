@@ -1,6 +1,6 @@
 package com.devteria.server.exception;
 
-import com.devteria.server.dto.request.ApiResponse;
+import com.devteria.server.dto.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

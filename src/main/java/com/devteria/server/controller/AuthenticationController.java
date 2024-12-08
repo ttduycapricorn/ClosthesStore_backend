@@ -1,6 +1,6 @@
 package com.devteria.server.controller;
 
-import com.devteria.server.dto.request.ApiResponse;
+import com.devteria.server.dto.response.ApiResponse;
 import com.devteria.server.dto.request.AuthenticationRequest;
 import com.devteria.server.dto.request.IntrospectRequest;
 import com.devteria.server.dto.response.AuthenticationResponse;
@@ -23,7 +23,6 @@ import java.text.ParseException;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthenticationController {
     AuthenticationService authenticationService;
-
 
     @PostMapping("/token")
     ApiResponse<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest authenticationRequest){

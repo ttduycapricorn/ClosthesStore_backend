@@ -7,24 +7,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "comments")
+@Table(name = "orders")
 @Getter
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Comment {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Long id; // Changed from String to Long
 
-    String content;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false) // Foreign key to Product
-    Product product;
+    String orderNumber;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false) // Optional: link to Order if needed
-    Order order;
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    List<Comment> comments = new ArrayList<>();
 }
