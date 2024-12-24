@@ -1,32 +1,32 @@
 package com.devteria.server.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id; // Changed from String to Long
-
-    String orderNumber;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    User user;
+    private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    List<Comment> comments = new ArrayList<>();
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private OrderStatus status;
 }

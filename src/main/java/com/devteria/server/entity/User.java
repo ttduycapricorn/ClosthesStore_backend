@@ -2,19 +2,21 @@ package com.devteria.server.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import javax.management.relation.Role;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
 @Entity
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,12 +37,14 @@ public class User {
     @Column(nullable = false)
     String email;
 
+
+
     @Column(nullable = false)
     String phone;
 
     LocalDate birthDay;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    Roles role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Review> reviews = new ArrayList<>();
+
 }
