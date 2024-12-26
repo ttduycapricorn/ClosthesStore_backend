@@ -16,7 +16,6 @@ public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     @Column(name = "status_name")
     String statusName;
 }

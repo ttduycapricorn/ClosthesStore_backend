@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -37,8 +38,6 @@ public class User {
     @Column(nullable = false)
     String email;
 
-
-
     @Column(nullable = false)
     String phone;
 
@@ -47,4 +46,5 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Review> reviews = new ArrayList<>();
 
+    Set<String> roles;
 }

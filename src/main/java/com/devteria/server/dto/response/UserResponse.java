@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -19,10 +20,10 @@ public class UserResponse {
     String id;
     @Column(nullable = false)
     String username;
-    String password;
     String firstName;
     String lastName;
     String email;
     String phone;
     LocalDate birthDay;
+    Set<String> roles;
 }
