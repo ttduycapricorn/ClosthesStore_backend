@@ -46,7 +46,8 @@ public class User {
     LocalDate birthDay;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     List<Review> reviews = new ArrayList<>();
-
+    
     Set<String> roles;
 }

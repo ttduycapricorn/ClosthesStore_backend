@@ -1,6 +1,5 @@
 package com.devteria.server.dto.response;
 
-import com.devteria.server.exception.ErrorCode;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
