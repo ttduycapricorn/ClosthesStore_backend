@@ -3,6 +3,7 @@ package com.devteria.server.controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,9 +21,14 @@ public class ProductController {
         // Delete a product
     }
 
-    @GetMapping
+    @PutMapping
     public Boolean updateProduct(String id){
         // Update a product
         return true;
+    }
+
+    @GetMapping
+    public void getProduct(String id){
+        // Get a product
     }
 }

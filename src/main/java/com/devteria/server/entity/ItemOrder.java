@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class ItemOrder {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
